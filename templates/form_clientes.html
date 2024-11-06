@@ -1,0 +1,32 @@
+<form class="c-form"
+    {% if cliente %}
+        action="{{ url_for('cliente.update_cliente_id', id_cliente=cliente.id) }}"
+    {% else %}
+        action="{{ url_for('cliente.inserir_cliente') }}"
+    {% endif %}
+        method="{% if cliente %}PUT{% else %}POST{% endif %}"
+    {% if cliente %}
+        c-swap="#cliente-{{cliente.id}}"
+    {% else %}
+        c-append="#lista-clientes">
+    {%endif%}
+    
+
+    <div class="mb-3">
+        <label class="form-label">Nome</label>
+        <input type="text" class="form-control"
+            {% if cliente %} value="{{ cliente.nome }}"{% endif %}
+            name="nome">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-control"
+            {% if cliente %} value="{{ cliente.email }}"{% endif %}
+            name="email">
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        {% if cliente %}Salvar alteração{% else %}Adicionar cliente{% endif %}
+    </button>
+</form>
